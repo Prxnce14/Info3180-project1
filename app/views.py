@@ -9,6 +9,7 @@ from app import app
 from flask import render_template, request, redirect, url_for
 
 
+
 ###
 # Routing for your application.
 ###
@@ -22,7 +23,7 @@ def home():
 @app.route('/about/')
 def about():
     """Render the website's about page."""
-    return render_template('about.html', name="Mary Jane")
+    return render_template('about.html', name = "Nicholas Joiles")
 
 
 ###

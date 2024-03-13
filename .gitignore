@@ -9,6 +9,8 @@ __pycache__
 # virtualenv
 .venv/
 venv/
+flask_env/
+.flask_env/
 
 # nodejs
 node_modules
