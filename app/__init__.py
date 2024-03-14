@@ -15,3 +15,4 @@ migrate = Migrate(app, db)
 
 
 from app import views
+from app import models

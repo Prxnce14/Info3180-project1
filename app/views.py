@@ -5,8 +5,9 @@ Werkzeug Documentation:  https://werkzeug.palletsprojects.com/
 This file contains the routes for your application.
 """
 
-from app import app
+from app import app, db ;
 from flask import render_template, request, redirect, url_for
+from app.models import realestate
 
 
 
@@ -42,7 +43,7 @@ def properties():
 
 
 @app.route('/properties/<propertyid>')
-def view_properties():
+def view_properties(propertyid):
     return render_template('about.html')
 
 
