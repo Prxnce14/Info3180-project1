@@ -1,5 +1,6 @@
 blinker==1.7.0
 click==8.1.7
+colorama==0.4.6
 Flask==3.0.2
 gunicorn==21.2.0
 importlib-metadata==6.0.0
@@ -10,3 +11,7 @@ packaging==23.2
 python-dotenv==1.0.1
 Werkzeug==3.0.1
 zipp==3.13.0
+Flask-Migrate==4.0.4
+Flask-SQLAlchemy==3.0.3
+Flask-WTF==1.2.1
+psycopg2==2.9.5

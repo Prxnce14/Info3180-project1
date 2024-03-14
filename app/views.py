@@ -30,6 +30,24 @@ def about():
 # The functions below should be applicable to all Flask apps.
 ###
 
+
+@app.route('/properties/create')
+def create_properties():
+    return render_template('about.html')
+
+
+@app.route('/properties')
+def properties():
+    return render_template('about.html')
+
+
+@app.route('/properties/<propertyid>')
+def view_properties():
+    return render_template('about.html')
+
+
+
+
 # Display Flask WTF errors as Flash messages
 def flash_errors(form):
     for field, errors in form.errors.items():
