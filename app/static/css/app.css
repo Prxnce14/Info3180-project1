@@ -1,9 +1,38 @@
 body 
 {
     padding-top: 5rem;
+    background-color: aliceblue;
 }
 
 .foot
 {
     text-align: center;
+}
+
+.tertiary-row 
+{
+    display: flex;
+}
+
+.tertiary-row .form-group 
+{
+    flex: 1;
+    margin-right: 10px; /* Adjust as needed */
+}
+
+.secondary .form-group,
+.tertiary .form-group 
+{
+    width: 50%;
+    float: left;
+}
+
+.form-group-loc
+{
+    width: 49.2%;
+}
+
+.form-group-img
+{
+    width: fit-content;
 }

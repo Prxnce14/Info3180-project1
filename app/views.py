@@ -5,9 +5,12 @@ Werkzeug Documentation:  https://werkzeug.palletsprojects.com/
 This file contains the routes for your application.
 """
 
+import os
 from app import app, db ;
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, flash, session, send_from_directory
 from app.models import realestate
+from app.forms import PropertyForm, TypeForm
+from werkzeug.utils import secure_filename
 
 
 
@@ -32,19 +35,64 @@ def about():
 ###
 
 
-@app.route('/properties/create')
+@app.route('/properties/create', methods=['POST', 'GET'])
 def create_properties():
-    return render_template('about.html')
+    
+    form = PropertyForm()
+    myform = TypeForm()
+    if request.method == 'POST':
+        try:
+            if form.validate_on_submit() and myform.validate_on_submit():
+                title = form.prop_title.data
+                descript = form.descript.data
+                room_no = form.room_no.data
+                bath_no = form.bath_no.data
+                price = form.price.data
+                type = myform.prop_type.data
+                local = form.location.data
+                img = form.photofile.data
+                filename = secure_filename(img.filename)
+                img.save(os.path.join(
+                    app.config['UPLOAD_FOLDER'], filename
+                ))
+
+                new_prop =  realestate(title, descript, room_no, bath_no, price, type, local, filename)
+                db.session.add(new_prop)
+                db.session.commit()
+
+                flash('Property Added', 'success')
+                return redirect(url_for('properties'))
+            else:
+                flash_errors(form)
+                flash_errors(myform)
+        except Exception as e:
+            # Handle any exceptions here
+            flash({'An error occurred' : str(e)}, 400)
+
+    return render_template('aproperty.html', form=form, myform=myform)
 
 
-@app.route('/properties')
+@app.route('/properties', methods=['GET'])
 def properties():
+
+    try:
+        
+    
+    except Exception as e:
+        flash({'An error occurred' : str(e)}, 400)
+
     return render_template('about.html')
 
 
 @app.route('/properties/<propertyid>')
 def view_properties(propertyid):
     return render_template('about.html')
+
+
+
+@app.route('/uploads/<filename>')
+def get_image(filename):
+    return send_from_directory(os.path.join(os.getcwd(), app.config['UPLOAD_FOLDER']), filename)
 
 
 
