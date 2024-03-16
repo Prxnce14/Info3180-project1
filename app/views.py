@@ -76,18 +76,22 @@ def create_properties():
 def properties():
 
     try:
-        
+        properties = realestate.query.all()
+        return render_template('properties.html', properties = properties)
     
     except Exception as e:
         flash({'An error occurred' : str(e)}, 400)
 
-    return render_template('about.html')
 
-
-@app.route('/properties/<propertyid>')
+@app.route('/properties/<propertyid>', methods = ['GET'])
 def view_properties(propertyid):
-    return render_template('about.html')
 
+    try:
+        prop_id = realestate.query.filter_by(id=propertyid).first()
+        return render_template('property.html', property = prop_id)
+    
+    except Exception as e:
+        flash({'An error occurred' : str(e)}, 400)
 
 
 @app.route('/uploads/<filename>')
