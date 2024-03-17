@@ -27,4 +27,7 @@ class realestate(db.Model):
         self.tpype = tipo
         self.location = local
         self.pname = pnombre    
+    
+    def __repr__(self):
+        return '<realestate %r>' % self.title
 

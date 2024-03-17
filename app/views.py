@@ -9,7 +9,7 @@ import os
 from app import app, db ;
 from flask import render_template, request, redirect, url_for, flash, session, send_from_directory
 from app.models import realestate
-from app.forms import PropertyForm, TypeForm
+from app.forms import PropertyForm
 from werkzeug.utils import secure_filename
 
 
@@ -30,32 +30,28 @@ def about():
     return render_template('about.html', name = "Nicholas Joiles")
 
 
-###
-# The functions below should be applicable to all Flask apps.
-###
-
 
 @app.route('/properties/create', methods=['POST', 'GET'])
 def create_properties():
     
     form = PropertyForm()
-    myform = TypeForm()
+
     if request.method == 'POST':
         try:
-            if form.validate_on_submit() and myform.validate_on_submit():
+            if form.validate_on_submit():
                 title = form.prop_title.data
                 descript = form.descript.data
                 room_no = form.room_no.data
                 bath_no = form.bath_no.data
                 price = form.price.data
-                type = myform.prop_type.data
+                type = form.prop_type.data
                 local = form.location.data
                 img = form.photofile.data
                 filename = secure_filename(img.filename)
-                img.save(os.path.join(
-                    app.config['UPLOAD_FOLDER'], filename
-                ))
 
+                img.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+                
                 new_prop =  realestate(title, descript, room_no, bath_no, price, type, local, filename)
                 db.session.add(new_prop)
                 db.session.commit()
@@ -64,20 +60,19 @@ def create_properties():
                 return redirect(url_for('properties'))
             else:
                 flash_errors(form)
-                flash_errors(myform)
+              
         except Exception as e:
             # Handle any exceptions here
             flash({'An error occurred' : str(e)}, 400)
 
-    return render_template('aproperty.html', form=form, myform=myform)
+    return render_template('aproperty.html', form=form)
 
 
 @app.route('/properties', methods=['GET'])
 def properties():
 
     try:
-        properties = realestate.query.all()
-        return render_template('properties.html', properties = properties)
+        return render_template('properties.html', properties = realestate.query.all())
     
     except Exception as e:
         flash({'An error occurred' : str(e)}, 400)
@@ -100,6 +95,32 @@ def get_image(filename):
 
 
 
+# def get_uploaded_images():
+#     rootdir = os.getcwd() 
+#     images = []
+    
+#     for subdir, dirs, files in os.walk(rootdir + '/uploads'):
+#         for file in files:
+#             if file.endswith(('jpg', 'png',)):
+#                 images.append(file)
+#     return images
+
+
+
+def get_uploaded_images():
+    rootdir =os.getcwd()
+    file_lst=[]
+    # print("root directry:",rootdir)
+    for subdir, dirs, files in os.walk(rootdir + 'uploads/'):
+        for file in files:
+            file_lst.append(os.path.join(subdir, file))
+    return file_lst
+
+
+
+###
+# The functions below should be applicable to all Flask apps.
+###
 
 # Display Flask WTF errors as Flash messages
 def flash_errors(form):

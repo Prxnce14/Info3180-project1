@@ -9,23 +9,26 @@
 
     <div class = "grid-container">
         {% for property in properties %}
-
+    
             <div class="card">
-                <img src="{{ url_for('get_image', filename=property.img) }}">
-
+                <div class="grid-item">
+                    <img src="{{ url_for('get_image', filename=property.pname) }}">
+                </div>
+        
                 <div class="card-body">
                     <h3 class = "title"> {{ property.title }}</h3>
                     <p class = "location">
                         <i class="fa-solid fa-location-dot"></i>
-                        {{property.local}}
+                        {{property.location}}
                     </p>
                     <p class = "ps-price">
                         ${{property.price}}</p>
                 </div>
-                <a class="btn btn-primary" class = "btn" href= "{{url_for('getProperty',propertyid= property.id)}}">View Property</a>
+                <a class="btn btn-primary" class = "btn" href= "{{url_for('view_properties',propertyid= property.id)}}">View Property</a>
             </div>
         {% endfor %}
     </div>
+    
 
 <br>
 <br>

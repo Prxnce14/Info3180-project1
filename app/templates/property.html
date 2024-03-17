@@ -7,28 +7,31 @@
 
     <div class="property">
 
-        <img src="{{ url_for('get_image', filename=property.img) }}">
+        <img src="{{ url_for('get_image', filename=property.pname) }}">
+
+        <br>
+        <br>
     
         <div class="property-info">
             <h3 class = "prop-title">{{ property.title }}</h3>
     
             <div class="price-type">
                 <p class="price">${{ property.price }}</p>
-                <p class="type">{{ property.prop_type }}</p>
+                <p class="type">{{ property.ptype }}</p>
             </div>
     
             <div class = "description">
-                <p>{{ property.descript }}</p>
+                <p>{{ property.description }}</p>
             </div>
             
             <div class="rooms">
                 <div class="bedrooms">
                     <i class="fa-solid fa-bed"></i>
-                    <p>{{ property.room_no }} Bedrooms</p>
+                    <p>{{ property.num_rooms}} Bedrooms</p>
                 </div>
                 <div class="bathrooms">
                     <i class="fa-solid fa-bath"></i>
-                    <p>{{ property.bath_no }} Bathrooms</p>
+                    <p>{{ property.num_brooms}} Bathrooms</p>
                 </div>
             </div>
     
