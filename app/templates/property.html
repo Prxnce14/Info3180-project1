@@ -6,10 +6,10 @@
     {% include 'flash_messages.html' %}
 
     <div class="property">
-
-        <img src="{{ url_for('get_image', filename=property.pname) }}">
-
-        <br>
+        <div class="property-img">
+            <img src="{{ url_for('get_image', filename=property.pname) }}">
+        </div>
+        
         <br>
     
         <div class="property-info">
@@ -26,17 +26,21 @@
             
             <div class="rooms">
                 <div class="bedrooms">
-                    <i class="fa-solid fa-bed"></i>
-                    <p>{{ property.num_rooms}} Bedrooms</p>
+                    <p>
+                        <i class="fas fa-bed"></i>
+                        {{ property.num_rooms}} Bedrooms
+                    </p>
                 </div>
                 <div class="bathrooms">
-                    <i class="fa-solid fa-bath"></i>
-                    <p>{{ property.num_brooms}} Bathrooms</p>
+                    <p>
+                        <i class="fas fa-bath"></i>
+                        {{ property.num_brooms}} Bathrooms
+                    </p>
                 </div>
             </div>
     
             <div class="location">
-                <i class="fa-solid fa-location-dot"></i>
+                <i class="fas fa-map-marker-alt"></i>
                 <p>{{ property.location }}</p>
             </div>
     

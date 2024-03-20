@@ -5,58 +5,59 @@
 
     {% include 'flash_messages.html' %}
 
-    
-    <form method="post" action="{{ url_for('create_properties')}}" enctype="multipart/form-data">
-        {{ form.csrf_token }}
-        
-        <div class = "create_prop" >
-            <div class="form-group mb-3">
-                {{ form.prop_title.label(class="form-label") }} 
-                {{ form.prop_title(class="form-control", placeholder= "The Crescents") }}
-            </div>
-        
-            <div class="form-group mb-3">
-                {{ form.descript.label(class="form-label") }}
-                {{ form.descript(class="form-control", placeholder = "Bathed in natural light streaming through expansive windows the open-concept living space seamlessly blends modern elegance with timeless charm. ")}}
-            </div>
-        
-            <div class="primary" >
-                <div class="secondary tertiary-row">
-                    <div class="form-group mb-3">
-                        {{ form.room_no.label(class="form-label") }} 
-                        {{ form.room_no(class="form-control", placeholder= "3") }}
+    <div class="container2">
+        <form method="post" action="{{ url_for('create_properties')}}" enctype="multipart/form-data">
+            {{ form.csrf_token }}
+            
+            <div class = "create_prop" >
+                <div class="form-group mb-3">
+                    {{ form.prop_title.label(class="form-label") }} 
+                    {{ form.prop_title(class="form-control", placeholder= "The Crescents") }}
+                </div>
+            
+                <div class="form-group mb-3">
+                    {{ form.descript.label(class="form-label") }}
+                    {{ form.descript(class="form-control", placeholder = "Bathed in natural light streaming through expansive windows the open-concept living space seamlessly blends modern elegance with timeless charm. ")}}
+                </div>
+            
+                <div class="primary" >
+                    <div class="secondary tertiary-row">
+                        <div class="form-group mb-3">
+                            {{ form.room_no.label(class="form-label") }} 
+                            {{ form.room_no(class="form-control", placeholder= "3") }}
+                        </div>
+                        <div class="form-group mb-3">
+                            {{ form.bath_no.label(class="form-label") }} 
+                            {{ form.bath_no(class="form-control", placeholder= "2", rows="3") }}
+                        </div>
                     </div>
-                    <div class="form-group mb-3">
-                        {{ form.bath_no.label(class="form-label") }} 
-                        {{ form.bath_no(class="form-control", placeholder= "2", rows="3") }}
+            
+                    <div class="tertiary tertiary-row">
+                        <div class="form-group mb-3">
+                            {{ form.price.label(class="form-label") }} 
+                            {{ form.price(class="form-control", placeholder= "15,000,000") }}
+                        </div>
+                        <div class="form-group mb-3">
+                            {{ form.prop_type.label(class="form-label") }} 
+                            {{ form.prop_type(class="form-control") }}
+                        </div>
                     </div>
                 </div>
-        
-                <div class="tertiary tertiary-row">
-                    <div class="form-group mb-3">
-                        {{ form.price.label(class="form-label") }} 
-                        {{ form.price(class="form-control", placeholder= "15,000,000") }}
-                    </div>
-                    <div class="form-group mb-3">
-                        {{ form.prop_type.label(class="form-label") }} 
-                        {{ form.prop_type(class="form-control") }}
-                    </div>
+                
+                <div class="form-group-loc mb-3">
+                    {{ form.location.label(class="form-label") }} 
+                    {{ form.location(class="form-control", placeholder= "10 Waterloo Rd") }}
                 </div>
-            </div>
+                
+                <div class="form-group-img mb-3">
+                    {{ form.photofile.label(class="form-label") }}
+                    {{ form.photofile(class="form-control") }}
+                </div>
             
-            <div class="form-group-loc mb-3">
-                {{ form.location.label(class="form-label") }} 
-                {{ form.location(class="form-control", placeholder= "10 Waterloo Rd") }}
+                <button type="submit" class="btn btn-primary">Add Property</button>
             </div>
-            
-            <div class="form-group-img mb-3">
-                {{ form.photofile.label(class="form-label") }}
-                {{ form.photofile(class="form-control") }}
-            </div>
-        
-            <button type="submit" class="btn btn-primary">Add Property</button>
-        </div>
-    </form>
+        </form>
+    </div>
     
 
 {% endblock %}
