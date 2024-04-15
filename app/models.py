@@ -24,7 +24,7 @@ class realestate(db.Model):
         self.num_rooms = nroom
         self.num_brooms = nbroom
         self.price = precio
-        self.tpype = tipo
+        self.ptype = tipo
         self.location = local
         self.pname = pnombre    
     
